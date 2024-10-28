@@ -24,7 +24,9 @@ function findElementById(id, isCreateElement, value) {
 
 function createTagClassList(tag, value, classes) {
     const element = document.createElement(tag)
-    element.innerText = value;
+    if (value) {
+        element.innerText = value;
+    }
     element.classList.add(...classes.split(' '))
     return element
 }
@@ -57,13 +59,26 @@ function movieCard(movieData) {
         // const raging = element.rating;
         // const review = element.content
         // const by = element.by
-        const { title, rating, content, by } = element
+        const card = createTagClassList('div', false, 'card mt-4')
+        const { title, rating, content, by, on } = element
 
+        // title and raging
         const movieNameTag = createTagClassList('p', title, 'text-xl', 'text-red-100')
-        movieNameTag.innerHtml = `<span> - ${rating}</span>`
-        console.log(title, rating, content, by)
+        const movieNameRaging = createTagClassList('span', rating, 'ml-1')
+        movieNameRaging.innerText = ` -  (${rating})`
+        movieNameTag.appendChild(movieNameRaging)
+        card.appendChild(movieNameTag)
 
-        // card.appendChild(movieCardWrapper)
+        //content
+        const contentTag = createTagClassList('p', content, 'text-gray-400 pt-2 font-thin')
+        contentTag.innerText = `${content} (Time:  ${new Intl.DateTimeFormat('en-IN').format(on)})`
+        card.appendChild(contentTag)
+
+        // by
+        const userName = createTagClassList('p', by, 'text-md')
+        card.appendChild(userName)
+
+        movieCardWrapper.appendChild(card)
     })
 }
 init()
