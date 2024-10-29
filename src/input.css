@@ -11,3 +11,10 @@
     color: rgb(33, 33, 67);
     font-weight: 600;
 }
+
+.btn {
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid rgb(219, 198, 198);
+    background-color: rgb(203, 203, 241);
+}
